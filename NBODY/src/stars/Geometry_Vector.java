@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
  *
  */
 public class Geometry_Vector extends Point2D.Double {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -82,7 +82,7 @@ public class Geometry_Vector extends Point2D.Double {
 	 * @return my magnitude (the distance from the origin to my X,Y) Think
 	 *         Pythagoras
 	 */
-	public double magnitude() {	
+	public double magnitude() {
 		return Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2));
 	}
 
@@ -90,7 +90,7 @@ public class Geometry_Vector extends Point2D.Double {
 	 * @return an informative (but concise) description of this object
 	 */
 	public String toString() {
-		return "Vector: x=" + this.getX() + " y=" + this.getY() + " magnitude=" + this.magnitude();
+		return "Vector: x= " + this.getX() + " y= " + this.getY() + " magnitude= " + this.magnitude();
 	}
 
 	/**
