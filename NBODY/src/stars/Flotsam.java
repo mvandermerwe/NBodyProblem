@@ -1,8 +1,8 @@
 package stars;
 
-public class Flotsuam {
+public class Flotsam {
 
-	public Flotsuam() {
+	public Flotsam() {
 		// TODO Auto-generated constructor stub
 	}
 
