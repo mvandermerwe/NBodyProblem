@@ -1,5 +1,9 @@
 package stars;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.JComponent;
 
 /**
@@ -257,6 +261,7 @@ public abstract class Satellite extends JComponent {
 	 */
 	public void update_screen_coordinates(Geometry_Vector system_center, double system_radius, int window_width,
 			int window_height) {
+		this.update_display_size(this.radius);
 		// Basic first version that displays at defined location so we can see
 		// stuff.
 		this.setLocation(500, 500);
@@ -336,4 +341,11 @@ public abstract class Satellite extends JComponent {
 	 */
 	abstract protected void update_display_size(double radius_of_system);
 
+	@Override
+	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2.fillOval(0, 0, this.getWidth(), this.getHeight());
+	}
 }
