@@ -1,5 +1,7 @@
 package stars;
 
+import java.awt.Dimension;
+
 public class Black_Hole extends Satellite {
 
 	public Black_Hole(double _x, double _y, double my_mass, String name) {
@@ -8,8 +10,7 @@ public class Black_Hole extends Satellite {
 
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		// TODO Auto-generated method stub
-
+		this.setSize(new Dimension((int) (radius_of_system*2),(int) (radius_of_system*2)));
 	}
 
 }

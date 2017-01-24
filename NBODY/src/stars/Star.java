@@ -1,5 +1,7 @@
 package stars;
 
+import java.awt.Dimension;
+
 public class Star extends Satellite {
 
 	public Star(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
@@ -9,8 +11,7 @@ public class Star extends Satellite {
 
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		// TODO Auto-generated method stub
-
+		this.setSize(new Dimension(30,30));
 	}
 
 }
