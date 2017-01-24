@@ -98,6 +98,22 @@ public abstract class Satellite extends JComponent {
 		this.setName(name);
 	}
 
+	public Satellite(double _x, double _y, double my_mass, String name) {
+		x = _x;
+		y = _y;
+		mass = my_mass;
+		this.setName(name);
+		// TODO Auto-generated constructor stub THIS IS ONLY FOR A BLACKHOLE
+	}
+
+	public Satellite(int _x, int _y, int _xVelocity, int _yVelocity) {
+		x = _x;
+		y = _y;
+		xVelocity = _xVelocity;
+		yVelocity = _yVelocity;
+		// TODO Auto-generated constructor stub THIS IS ONLY FOR FLOTSAM
+	}
+
 	/**
 	 * Function Purpose:
 	 * 
