@@ -30,6 +30,7 @@ public abstract class Satellite extends JComponent {
 	private double y;
 	private double xVelocity;
 	private double yVelocity;
+	private Geometry_Vector velocityVector;
 	private double mass;
 	private double radius;
 
@@ -95,6 +96,7 @@ public abstract class Satellite extends JComponent {
 		yVelocity = velocity_y;
 		mass = my_mass;
 		radius = my_radius;
+		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
 		this.setName(name);
 	}
 
@@ -103,7 +105,8 @@ public abstract class Satellite extends JComponent {
 		y = _y;
 		mass = my_mass;
 		this.setName(name);
-		//THIS IS ONLY FOR A BLACKHOLE
+		velocityVector = new Geometry_Vector(0, 0);
+		// THIS IS ONLY FOR A BLACKHOLE
 	}
 
 	public Satellite(int _x, int _y, int _xVelocity, int _yVelocity) {
@@ -111,7 +114,8 @@ public abstract class Satellite extends JComponent {
 		y = _y;
 		xVelocity = _xVelocity;
 		yVelocity = _yVelocity;
-		//THIS IS ONLY FOR FLOTSAM
+		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
+		// THIS IS ONLY FOR FLOTSAM
 	}
 
 	/**
@@ -177,7 +181,7 @@ public abstract class Satellite extends JComponent {
 	 * 
 	 */
 	public void update_position(double dt) {
-		//Simple update based on velocity * timestep.
+		// Simple update based on velocity * timestep.
 		this.x += this.xVelocity * dt;
 		this.y += this.yVelocity * dt;
 	}
@@ -253,8 +257,9 @@ public abstract class Satellite extends JComponent {
 	 */
 	public void update_screen_coordinates(Geometry_Vector system_center, double system_radius, int window_width,
 			int window_height) {
-		//Basic first version that displays at defined location so we can see stuff.
-		this.setLocation(500,500);
+		// Basic first version that displays at defined location so we can see
+		// stuff.
+		this.setLocation(500, 500);
 	}
 
 	/**
