@@ -9,9 +9,16 @@ public class Star extends Satellite {
 		super(_x, _y, velocity_x, velocity_y, my_mass, my_radius, name);
 	}
 
+	/**
+	 * Divide the radius of the star by the radius of the system and multiply by
+	 * our constant multiplier which we decided by analysis to be such that with
+	 * the default size, our sun has a size of 50.
+	 */
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		this.setSize(new Dimension(200,200));
+		int radius = (int) ((this.radius / radius_of_system) * 102510);
+		//System.out.println(radius);
+		this.setSize(new Dimension(2 * radius, 2 * radius));
 	}
 
 }
