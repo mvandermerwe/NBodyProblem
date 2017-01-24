@@ -36,7 +36,9 @@ public abstract class Satellite extends JComponent {
 	private double yVelocity;
 	private Geometry_Vector velocityVector;
 	private double mass;
+
 	protected double radius;
+	protected int GUIRadius;
 
 	/**
 	 * Any data that is common to all heavenly bodies should go here.
@@ -260,7 +262,8 @@ public abstract class Satellite extends JComponent {
 		this.update_display_size(system_radius);
 		// Basic first version that displays at defined location so we can see
 		// stuff.
-		this.setLocation(500, 500);
+		this.setLocation((int) (system_center.getX() + 1000 * (this.x / system_radius) - this.GUIRadius),
+				(int) (system_center.getY() + 1000 * (this.y / system_radius) - this.GUIRadius));
 	}
 
 	/**

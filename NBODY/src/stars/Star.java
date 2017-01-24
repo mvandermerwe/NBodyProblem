@@ -16,9 +16,9 @@ public class Star extends Satellite {
 	 */
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		int radius = (int) ((this.radius / radius_of_system) * 102510);
-		//System.out.println(radius);
-		this.setSize(new Dimension(2 * radius, 2 * radius));
+		this.GUIRadius = (int) ((this.radius / radius_of_system) * 102510);
+		// System.out.println(radius);
+		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 	}
 
 }
