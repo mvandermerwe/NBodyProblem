@@ -96,8 +96,6 @@ public abstract class Satellite extends JComponent {
 			String name) {
 		x = _x;
 		y = _y;
-		xVelocity = velocity_x;
-		yVelocity = velocity_y;
 		mass = my_mass;
 		radius = my_radius;
 		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
@@ -116,8 +114,6 @@ public abstract class Satellite extends JComponent {
 	public Satellite(int _x, int _y, int _xVelocity, int _yVelocity) {
 		x = _x;
 		y = _y;
-		xVelocity = _xVelocity;
-		yVelocity = _yVelocity;
 		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
 		// THIS IS ONLY FOR FLOTSAM
 	}
@@ -186,8 +182,8 @@ public abstract class Satellite extends JComponent {
 	 */
 	public void update_position(double dt) {
 		// Simple update based on velocity * timestep.
-		this.x += this.xVelocity * dt;
-		this.y += this.yVelocity * dt;
+		this.x += this.velocityVector.x * dt;
+		this.y += this.velocityVector.y * dt;
 	}
 
 	/**
@@ -217,8 +213,8 @@ public abstract class Satellite extends JComponent {
 	 * 
 	 */
 	public void update_velocity(Geometry_Vector acceleration, double dt) {
-		this.xVelocity += acceleration.getX() * dt;
-		this.yVelocity += acceleration.getY() * dt;
+		this.velocityVector.x += acceleration.getX() * dt;
+		this.velocityVector.y += acceleration.getY() * dt;
 	}
 
 	/**
@@ -282,7 +278,7 @@ public abstract class Satellite extends JComponent {
 
 	/**
 	 *
-	 * Abstract Method Choice: does what type we are define what are position
+	 * Abstract Method Choice: does what type we are define what our position
 	 * is?
 	 *
 	 * @return our position
@@ -299,7 +295,7 @@ public abstract class Satellite extends JComponent {
 	 * @return our velocity
 	 */
 	public Geometry_Vector get_velocity() {
-		return new Geometry_Vector(xVelocity, yVelocity);
+		return velocityVector;
 	}
 
 	/**
