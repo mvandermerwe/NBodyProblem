@@ -26,6 +26,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -40,7 +42,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Star_Field extends JPanel
-		implements MouseListener, MouseWheelListener, ActionListener, MouseMotionListener {
+		implements MouseListener, MouseWheelListener, ActionListener, MouseMotionListener, ComponentListener {
 	/**
 	 * 
 	 * The following are public and used by the Simulator thread
@@ -109,6 +111,7 @@ public class Star_Field extends JPanel
 		this.addMouseListener(this);
 		this.addMouseWheelListener(this);
 		this.addMouseMotionListener(this);
+		this.addComponentListener(this);
 		this.setFocusable(true);
 		this.grabFocus();
 	}
@@ -654,6 +657,37 @@ public class Star_Field extends JPanel
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// do nothing
+	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		Component[] comps = this.getComponents();
+
+		for (int i = 0; i < comps.length; i++) {
+			if (comps[i] instanceof Satellite) {
+				Satellite sat = (Satellite) comps[i];
+				sat.update_screen_coordinates(this.center_of_system, this.radius_of_universe, this.getWidth(),
+						this.getHeight());
+			}
+		}
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
