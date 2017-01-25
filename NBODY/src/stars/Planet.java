@@ -11,9 +11,15 @@ public class Planet extends Satellite {
 
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		this.GUIRadius = (int) ((this.radius / radius_of_system) * 102510);
-		// System.out.println(radius);
-		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
+		if (this.radius > Solar_System_Facts.mercury_radius) {
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 898175); //
+			// System.out.println(this.getName());
+			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
+		} else {
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 8.77577 * Math.pow(10, 6)); //
+			System.out.println(this.getName());
+			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
+		}
 	}
 
 }
