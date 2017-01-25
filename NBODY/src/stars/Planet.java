@@ -12,7 +12,6 @@ public class Planet extends Satellite {
 	@Override
 	protected void update_display_size(double radius_of_system) {
 		this.GUIRadius = (int) ((this.radius / radius_of_system) * 498985);
-		System.out.println(this.getName());
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 	}
 
