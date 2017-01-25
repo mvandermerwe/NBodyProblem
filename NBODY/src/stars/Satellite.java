@@ -30,10 +30,7 @@ import javax.swing.JComponent;
  */
 
 public abstract class Satellite extends JComponent {
-	private double x;
-	private double y;
-	private double xVelocity;
-	private double yVelocity;
+	private Geometry_Vector positionVector;
 	private Geometry_Vector velocityVector;
 	private double mass;
 
@@ -96,17 +93,15 @@ public abstract class Satellite extends JComponent {
 	 */
 	public Satellite(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
 			String name) {
-		x = _x;
-		y = _y;
+		positionVector = new Geometry_Vector(_x, _y);
 		mass = my_mass;
 		radius = my_radius;
-		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
+		velocityVector = new Geometry_Vector(velocity_x, velocity_y);
 		this.setName(name);
 	}
 
 	public Satellite(double _x, double _y, double my_mass, String name) {
-		x = _x;
-		y = _y;
+		positionVector = new Geometry_Vector(_x, _y);
 		mass = my_mass;
 		this.setName(name);
 		velocityVector = new Geometry_Vector(0, 0);
@@ -114,9 +109,8 @@ public abstract class Satellite extends JComponent {
 	}
 
 	public Satellite(int _x, int _y, int _xVelocity, int _yVelocity) {
-		x = _x;
-		y = _y;
-		velocityVector = new Geometry_Vector(xVelocity, yVelocity);
+		positionVector = new Geometry_Vector(_x, _y);
+		velocityVector = new Geometry_Vector(_xVelocity, _yVelocity);
 		// THIS IS ONLY FOR FLOTSAM
 	}
 
@@ -184,8 +178,8 @@ public abstract class Satellite extends JComponent {
 	 */
 	public void update_position(double dt) {
 		// Simple update based on velocity * timestep.
-		this.x += this.velocityVector.x * dt;
-		this.y += this.velocityVector.y * dt;
+		this.positionVector.x += this.velocityVector.x * dt;
+		this.positionVector.y += this.velocityVector.y * dt;
 	}
 
 	/**
@@ -262,8 +256,11 @@ public abstract class Satellite extends JComponent {
 		this.update_display_size(system_radius);
 		// Basic first version that displays at defined location so we can see
 		// stuff.
-		this.setLocation((int) (system_center.getX() + 1000 * (this.x / system_radius) - this.GUIRadius),
-				(int) (system_center.getY() + 1000 * (this.y / system_radius) - this.GUIRadius));
+		Geometry_Vector guiLocation = new Geometry_Vector(this.positionVector);
+		guiLocation.multiply_me_by(1000);
+		guiLocation.divide_by(system_radius);
+		this.setLocation((int) (system_center.getX() + guiLocation.x - this.GUIRadius),
+				(int) (system_center.getY() + guiLocation.y - this.GUIRadius));
 	}
 
 	/**
@@ -287,7 +284,7 @@ public abstract class Satellite extends JComponent {
 	 * @return our position
 	 */
 	public Geometry_Vector get_position() {
-		return new Geometry_Vector(x, y);
+		return this.positionVector;
 	}
 
 	/**
@@ -298,7 +295,7 @@ public abstract class Satellite extends JComponent {
 	 * @return our velocity
 	 */
 	public Geometry_Vector get_velocity() {
-		return velocityVector;
+		return this.velocityVector;
 	}
 
 	/**
