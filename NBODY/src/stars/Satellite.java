@@ -257,6 +257,7 @@ public abstract class Satellite extends JComponent {
 		
 		Geometry_Vector guiLocation = new Geometry_Vector(this.positionVector);
 		guiLocation.divide_by(2 * system_radius);
+		//Separate these two because we want to scale them differently.
 		guiLocation.x = guiLocation.x * window_width;
 		guiLocation.y = guiLocation.y * window_height;
 		guiLocation.add_to_me(new Geometry_Vector(window_width/2, window_height/2));
