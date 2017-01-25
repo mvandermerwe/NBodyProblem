@@ -254,13 +254,13 @@ public abstract class Satellite extends JComponent {
 	public void update_screen_coordinates(Geometry_Vector system_center, double system_radius, int window_width,
 			int window_height) {
 		this.update_display_size(system_radius);
-		// Basic first version that displays at defined location so we can see
-		// stuff.
+		
 		Geometry_Vector guiLocation = new Geometry_Vector(this.positionVector);
-		guiLocation.multiply_me_by(1000);
-		guiLocation.divide_by(system_radius);
-		this.setLocation((int) (system_center.x + guiLocation.x - this.GUIRadius),
-				(int) (system_center.y + guiLocation.y - this.GUIRadius));
+		guiLocation.divide_by(2 * system_radius);
+		guiLocation.multiply_me_by(window_height);
+		guiLocation.add_to_me(new Geometry_Vector(window_width/2, window_height/2));
+		guiLocation.subtract_from_me(new Geometry_Vector(this.GUIRadius,this.GUIRadius));
+		this.setLocation((int) guiLocation.x,(int) guiLocation.y);
 	}
 
 	/**
