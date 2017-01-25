@@ -1,8 +1,11 @@
 package stars;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 public class Star extends Satellite {
+	
+	private boolean isSupernova = false;
 
 	public Star(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
 			String name) {
@@ -19,6 +22,10 @@ public class Star extends Satellite {
 		this.GUIRadius = (int) ((this.radius / radius_of_system) * 35506);
 		// System.out.println(radius);
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
+	}
+	
+	public void supernova(){
+		//Do something after it goes supernova.
 	}
 
 }

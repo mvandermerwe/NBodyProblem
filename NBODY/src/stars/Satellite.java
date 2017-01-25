@@ -32,7 +32,7 @@ import javax.swing.JComponent;
 public abstract class Satellite extends JComponent {
 	private Geometry_Vector positionVector;
 	private Geometry_Vector velocityVector;
-	private double mass;
+	protected double mass;
 
 	protected double radius;
 	protected int GUIRadius;
