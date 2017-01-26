@@ -83,7 +83,9 @@ public class Geometry_Vector extends Point2D.Double {
 	 *         Pythagoras
 	 */
 	public double magnitude() {
-		return Math.sqrt(Math.pow(this.getX(), 2) + Math.pow(this.getY(), 2));
+		double absX = Math.abs(this.getX());
+		double absY = Math.abs(this.getY());
+		return Math.sqrt(Math.pow(absX, 2) + Math.pow(absY, 2));
 	}
 
 	/**
@@ -98,8 +100,7 @@ public class Geometry_Vector extends Point2D.Double {
 	 * dividing each component (i.e., x,y) by the magnitude.
 	 */
 	public void normalize() {
-		this.x = this.getX() / this.magnitude();
-		this.y = this.getY() / this.magnitude();
+		this.divide_by(this.magnitude());
 	}
 
 }
