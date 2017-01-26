@@ -23,7 +23,7 @@ public class Star extends Satellite{
 	/**
 	 * Divide the radius of the star by the radius of the system and multiply by
 	 * our constant multiplier which we decided by analysis to be such that with
-	 * the default size, our sun has a size of 50.
+	 * the default size it is an acceptable size.
 	 */
 	@Override
 	protected void update_display_size(double radius_of_system) {
