@@ -8,14 +8,13 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Star extends Satellite implements MouseListener {
+public class Star extends Satellite{
 
 	private boolean isSupernova = false;
 
 	public Star(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
 			String name) {
 		super(_x, _y, velocity_x, velocity_y, my_mass, my_radius, name);
-		this.addMouseListener(this);
 	}
 
 	/**
@@ -33,34 +32,4 @@ public class Star extends Satellite implements MouseListener {
 	public void supernova() {
 		System.out.println("Trigger supernova explosion!!");
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		this.supernova();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

@@ -360,19 +360,27 @@ public class Star_Field extends JPanel
 	 * @param how_many
 	 *            - how many flotsam to create
 	 */
-	public void create_flotsam(int how_many) {
+	public void create_flotsam(int how_many, Planet planet) {
 
 		Random generator = new Random();
 
 		for (int i = 0; i < how_many; i++) {
 			Flotsam flotsam = null;
-
-			double radius = generator.nextInt((int) Solar_System_Facts.neptune_distance);
-
+			
 			double theta = generator.nextDouble() * Math.PI * 2;
+			int x;
+			int y;
 
-			int x = (int) (radius * Math.cos(theta));
-			int y = (int) (radius * Math.sin(theta));
+			double radius;
+			if(planet != null){
+				radius = generator.nextInt((int) planet.radius);
+				x = (int) (planet.get_position().x + (radius * Math.cos(theta)));
+				y = (int) (planet.get_position().y + (radius * Math.sin(theta)));
+			}else{
+				radius = generator.nextInt((int) Solar_System_Facts.neptune_distance);
+				x = (int) (radius * Math.cos(theta));
+				y = (int) (radius * Math.sin(theta));
+			}
 
 			if (this.give_flotsam_initial_velocity) {
 				flotsam = new Flotsam(x, y, generator.nextInt(50000) - 25000, // velocity
@@ -549,6 +557,20 @@ public class Star_Field extends JPanel
 	 *            - the mouse event
 	 */
 	public void mousePressed(MouseEvent e) {
+		Component[] comps = this.getComponents();
+
+		for (int index = 0; index < comps.length; index++) {
+			if(comps[index].getBounds().contains(e.getPoint())){
+				if(comps[index] instanceof Star){
+					Star sun = (Star) comps[index];
+					sun.supernova();
+				}else if(comps[index] instanceof Planet){
+					Planet planet = (Planet) comps[index];
+					this.remove(planet);
+					this.create_flotsam(10, planet);
+				}
+			}
+		}
 	}
 
 	/**
@@ -626,7 +648,7 @@ public class Star_Field extends JPanel
 			this.remove_flotsam();
 			String[] halves = e.getActionCommand().split("_");
 			int count = Integer.parseInt(halves[1]);
-			this.create_flotsam(count);
+			this.create_flotsam(count, null);
 			this.repaint();
 		} else if (e.getActionCommand().contains("planet")) {
 			this.reset_stats();
@@ -675,19 +697,19 @@ public class Star_Field extends JPanel
 	@Override
 	public void componentMoved(ComponentEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -19,5 +19,11 @@ public class Planet extends Satellite {
 			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius)); 
 		}
 	}
+	
+	public void explode() {
+		System.out.println("Explode!");
+	}
+	
+	
 
 }

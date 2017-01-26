@@ -114,6 +114,12 @@ public abstract class Satellite extends JComponent {
 		velocityVector = new Geometry_Vector(_xVelocity, _yVelocity);
 		// THIS IS ONLY FOR FLOTSAM
 	}
+	
+	public Satellite() {
+		positionVector = new Geometry_Vector(0,0);
+		this.GUIRadius = 0;
+		// THIS IS ONLY FOR EXPLOSION
+	}
 
 	/**
 	 * Function Purpose:
