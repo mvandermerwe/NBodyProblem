@@ -254,7 +254,7 @@ public class Star_Field extends JPanel
 	private void create_planets() {
 		// create all the planets (though we might not use them....)
 		Star sun = new Star(this.center_of_system.x, this.center_of_system.y, 0, 0, Solar_System_Facts.sun_mass,
-				Solar_System_Facts.sun_radius, "Sun");
+				Solar_System_Facts.sun_radius, "Sun", this);
 
 		Planet mercury = new Planet(Solar_System_Facts.mercury_distance, 0, 0, Solar_System_Facts.mercury_speed,
 				Solar_System_Facts.mercury_mass, Solar_System_Facts.mercury_radius, "Mercury");

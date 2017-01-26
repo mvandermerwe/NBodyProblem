@@ -118,6 +118,7 @@ public abstract class Satellite extends JComponent {
 	public Satellite() {
 		positionVector = new Geometry_Vector(0,0);
 		this.GUIRadius = 0;
+		this.velocityVector = new Geometry_Vector(0,0);
 		// THIS IS ONLY FOR EXPLOSION
 	}
 
