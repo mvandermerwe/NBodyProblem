@@ -100,7 +100,9 @@ public class Geometry_Vector extends Point2D.Double {
 	 * dividing each component (i.e., x,y) by the magnitude.
 	 */
 	public void normalize() {
-		this.divide_by(this.magnitude());
+		if (this.magnitude() > 0) {
+			this.divide_by(this.magnitude());
+		}
 	}
 
 }

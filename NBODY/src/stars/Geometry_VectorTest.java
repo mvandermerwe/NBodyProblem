@@ -1,6 +1,6 @@
 package stars;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -127,7 +127,51 @@ public class Geometry_VectorTest {
 		assertEquals(a4.magnitude(), Math.sqrt(29), 0);
 	}
 
+	@Test
 	public void test_normalize() {
-		
+		// Base case.
+		Geometry_Vector a1 = new Geometry_Vector(1, 0);
+		a1.normalize();
+		assertEquals(a1.getX(), 1, 0.1);
+		assertEquals(a1.getY(), 0, 0.1);
+
+		// Simple base case.
+		Geometry_Vector a2 = new Geometry_Vector(1, 1);
+		a2.normalize();
+		assertEquals(a2.getX(), Math.sqrt(2) / 2, 0.1);// When we create a
+														// vector with length 1
+														// on both components,
+														// the normalized vector
+														// results
+		assertEquals(a2.getY(), Math.sqrt(2) / 2, 0.1);// in the specific
+														// components divided by
+														// the magnitude (square
+														// root of the
+														// hypotenuse)
+
+		// Zero case.
+		Geometry_Vector a3 = new Geometry_Vector(0, 0);
+		a3.normalize();
+		assertEquals(a3.getX(), 0, 0.1);
+		assertEquals(a3.getY(), 0, 0.1);
+
+		// Perfect case.
+		Geometry_Vector a4 = new Geometry_Vector(6, 8);
+		a4.normalize();
+		assertEquals(a4.getX(), 0.6, 0.1);
+		assertEquals(a4.getY(), 0.8, 0.1);
+
+		// Negative case.
+		Geometry_Vector a5 = new Geometry_Vector(-3, -4);
+		a5.normalize();
+		assertEquals(a5.getX(), -0.6, 0.1);
+		assertEquals(a5.getY(), -0.8, 0.1);
+
+		// One negative One positive case.
+		Geometry_Vector a6 = new Geometry_Vector(-3, 4);
+		a6.normalize();
+		assertEquals(a6.getX(), -0.6, 0.1);
+		assertEquals(a6.getY(), 0.8, 0.1);
+
 	}
 }
