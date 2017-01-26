@@ -40,7 +40,7 @@ public class Star extends Satellite{
 		isSupernova = true;
 		for(Component planet: stars.getComponents()){
 			if(planet instanceof Satellite){
-				if(!(planet instanceof Star)){
+				if(!(planet instanceof Star) && !(planet instanceof Flotsam)){
 					stars.remove(planet);
 					stars.create_flotsam(10, (Planet) planet);
 				}
