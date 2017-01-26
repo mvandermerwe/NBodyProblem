@@ -15,8 +15,8 @@ public class Planet extends Satellite {
 			this.GUIRadius = (int) ((this.radius / radius_of_system) * 288985);
 			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 		} else {
-			this.GUIRadius = (int) ((this.radius / radius_of_system) * 488985);
-			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 1600000);
+			this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius)); 
 		}
 	}
 

@@ -10,7 +10,7 @@ public class Black_Hole extends Satellite {
 
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		this.setSize(new Dimension((int) (radius_of_system*2),(int) (radius_of_system*2)));
+		this.setSize(new Dimension(10,10));
 	}
 
 }

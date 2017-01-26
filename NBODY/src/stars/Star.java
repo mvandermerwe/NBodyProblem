@@ -2,11 +2,14 @@ package stars;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Star extends Satellite implements MouseListener{
-	
+public class Star extends Satellite implements MouseListener {
+
 	private boolean isSupernova = false;
 
 	public Star(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
@@ -26,8 +29,19 @@ public class Star extends Satellite implements MouseListener{
 		// System.out.println(radius);
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 	}
-	
-	public void supernova(){
+
+	@Override
+	public void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2.fillOval(0, 0, this.getWidth(), this.getHeight());
+		g2.setColor(Color.WHITE);
+		g2.drawOval(0, 0, this.getWidth() - 1, this.getHeight() - 1);
+
+	}
+
+	public void supernova() {
 		System.out.println("Trigger supernova explosion!!");
 	}
 
@@ -39,25 +53,25 @@ public class Star extends Satellite implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

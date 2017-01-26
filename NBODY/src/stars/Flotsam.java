@@ -14,11 +14,13 @@ public class Flotsam extends Satellite {
 		this.mass = 1000000000;
 		xScale = sizeScale.nextInt(5) + 5;
 		yScale = sizeScale.nextInt(5) + 5;
+		this.setName("Flotsam");
 	}
 
 	@Override
 	protected void update_display_size(double radius_of_system) {
-		this.setSize(new Dimension(xScale, yScale));
+		this.GUIRadius = (int) (2889850000.0 / radius_of_system);
+		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 	}
 
 }
