@@ -3,10 +3,12 @@ package stars;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Random;
 
 public class Star extends Satellite {
 
 	private boolean isSupernova = false;
+	Random sizeChange = new Random();
 	private Star_Field stars;// to reference the starfield which stores all the
 								// planets
 
@@ -26,23 +28,23 @@ public class Star extends Satellite {
 		if (!isSupernova) {
 			// guiradius is the conversion factor between the gui and real life
 			// size based on the size of the solar system we are in
-			this.GUIRadius = (int) ((this.radius / radius_of_system) * 35506);// this
-																				// makes
-																				// the
-																				// sun
-																				// its
-																				// "normal"
-																				// size
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 35506 + sizeChange.nextInt(2));// this
+			// makes
+			// the
+			// sun
+			// its
+			// "normal"
+			// size
 		} else {
-			this.GUIRadius = (int) ((this.radius / radius_of_system) * 25506);// after
-																				// a
-																				// supernova
-																				// occurs,
-																				// the
-																				// sun
-																				// is
-																				// slightly
-																				// downsized
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 25506 + sizeChange.nextInt(5));// after
+			// a
+			// supernova
+			// occurs,
+			// the
+			// sun
+			// is
+			// slightly
+			// downsized
 		}
 
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
