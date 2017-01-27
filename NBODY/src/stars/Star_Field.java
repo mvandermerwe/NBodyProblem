@@ -366,17 +366,17 @@ public class Star_Field extends JPanel
 
 		for (int i = 0; i < how_many; i++) {
 			Flotsam flotsam = null;
-			
+
 			double theta = generator.nextDouble() * Math.PI * 2;
 			int x;
 			int y;
 
 			double radius;
-			if(planet != null){
+			if (planet != null) {
 				radius = generator.nextInt((int) planet.radius);
 				x = (int) (planet.get_position().x + (radius * Math.cos(theta)));
 				y = (int) (planet.get_position().y + (radius * Math.sin(theta)));
-			}else{
+			} else {
 				radius = generator.nextInt((int) Solar_System_Facts.neptune_distance);
 				x = (int) (radius * Math.cos(theta));
 				y = (int) (radius * Math.sin(theta));
@@ -560,12 +560,13 @@ public class Star_Field extends JPanel
 		Component[] comps = this.getComponents();
 
 		for (int index = 0; index < comps.length; index++) {
-			if(comps[index].getBounds().contains(e.getPoint())){
-				if(comps[index] instanceof Star){
+			if (comps[index].getBounds().contains(e.getPoint())) {
+				if (comps[index] instanceof Star) {
 					Star sun = (Star) comps[index];
 					sun.supernova();
-				}else if(comps[index] instanceof Planet){
+				} else if (comps[index] instanceof Planet) {
 					Planet planet = (Planet) comps[index];
+					System.out.println(planet.getName());
 					this.remove(planet);
 					this.create_flotsam(10, planet);
 				}
