@@ -1,9 +1,17 @@
+//Mark Van der Merwe and Tarun Sunkaraneni
 package stars;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * Test class for our Geometry_Vector class. Makes sure all functions work
+ * properly.
+ * 
+ * @author markvandermerwe
+ *
+ */
 public class Geometry_VectorTest {
 
 	@Test

@@ -1,3 +1,4 @@
+//Mark Van der Merwe and Tarun Sunkaraneni
 package stars;
 
 import java.awt.Component;

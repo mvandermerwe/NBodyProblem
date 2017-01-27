@@ -1,4 +1,4 @@
-
+//Mark Van der Merwe and Tarun Sunkaraneni
 /**
  * 
  */
@@ -7,7 +7,12 @@ package stars;
 import java.awt.geom.Point2D;
 
 /**
- * @author germain
+ * Geometry Vector holds an x and y and acts as our go to for operations
+ * involving the two. This class handles most basic functions of 2D vector math.
+ * Allows us an interface to change our location, velocity, acceleration, etc.
+ * all which act as vectors.
+ * 
+ * @author markvandermerwe
  *
  */
 public class Geometry_Vector extends Point2D.Double {

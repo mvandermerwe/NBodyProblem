@@ -1,3 +1,4 @@
+//Mark Van der Merwe and Tarun Sunkaraneni
 package stars;
 
 import java.awt.Color;
@@ -5,13 +6,23 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Random;
 
+/**
+ * Star class of type satellite that holds our solar system's sun.
+ * 
+ * @author markvandermerwe
+ *
+ */
 public class Star extends Satellite {
 
+	// Is it supernova? Check here.
 	private boolean isSupernova = false;
 	Random sizeChange = new Random();
 	private Star_Field stars;// to reference the starfield which stores all the
 								// planets
 
+	/**
+	 * See satellite for details.
+	 */
 	public Star(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
 			String name, Star_Field stars) {
 		super(_x, _y, velocity_x, velocity_y, my_mass, my_radius, name);
@@ -21,37 +32,26 @@ public class Star extends Satellite {
 	/**
 	 * Divide the radius of the star by the radius of the system and multiply by
 	 * our constant multiplier which we decided by analysis to be such that with
-	 * the default size it is an acceptable size.
+	 * the default size it is an acceptable size. Also, if supernova, change
+	 * things up a bit.
 	 */
 	@Override
 	protected void update_display_size(double radius_of_system) {
 		if (!isSupernova) {
-			// guiradius is the conversion factor between the gui and real life
-			// size based on the size of the solar system we are in
-			this.GUIRadius = (int) ((this.radius / radius_of_system) * 35506 + sizeChange.nextInt(2));// this
-			// makes
-			// the
-			// sun
-			// its
-			// "normal"
-			// size
+			// Makes the sun its 'real,' 'normal' size. Pulses.
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 35506 + sizeChange.nextInt(2));
 		} else {
-			this.GUIRadius = (int) ((this.radius / radius_of_system) * 25506 + sizeChange.nextInt(5));// after
-			// a
-			// supernova
-			// occurs,
-			// the
-			// sun
-			// is
-			// slightly
-			// downsized
+			// Sun is downscaled after supernova. Also pulses.
+			this.GUIRadius = (int) ((this.radius / radius_of_system) * 25506 + sizeChange.nextInt(5));
 		}
-
+		// set size according to GUIRadius.
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
-		// for setting the size according to GUIRadius. without this our sun
-		// wouldn't scale up and down in size with scrolling
 	}
 
+	/**
+	 * Function called when the Sun is clicked and goes supernova. Changes sun's
+	 * state and color and turns all other planets to flotsam!!!
+	 */
 	public void supernova() {
 		isSupernova = true;// if supernova is triggered, the supernova will be
 							// downsized
@@ -72,6 +72,7 @@ public class Star extends Satellite {
 		// pointer exception. to beat this we simply acknowledge the possibility
 		// of the exception happening
 		catch (NullPointerException e) {
+			e.printStackTrace();
 		}
 	}
 }

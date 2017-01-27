@@ -1,3 +1,4 @@
+//Mark Van der Merwe and Tarun Sunkaraneni
 package stars;
 
 import java.awt.Color;
@@ -13,55 +14,19 @@ import javax.swing.JComponent;
  *         Satellites are bodies that float around each other pulling at each
  *         other with gravity. The mass of an object determines how much
  *         gravitational force it applies to others.
- * 
- *
- *         Most of the methods below are labeled ABSTRACT... It is up to you to
- *         keep this labeling (and thus implement the functions in the children
- *         classes), or to remove the abstract label and implement the method
- *         for EVERY child, or two implement it here, but override it in
- *         specific children classes
- * 
- *         At the same time you are writing this class, you should consider
- *         writing specific children classes such as Planet, Star, or Flotsam.
- *         Also feel free to add comets, saucer, etc., but don't do so until the
- *         main program is itself working.
- *
- *         Finally, if you haven't implemented and testing your Geometry Vector
- *         code, any changes here will be in vain, as all math should use it.
  */
-
 public abstract class Satellite extends JComponent {
+	/**
+	 * All these fields are parts of all types of Satellites, thus we keep them
+	 * here - all satellites have position, velocity, mass, etc. Note, some are
+	 * protected so they can be used in subclasses.
+	 */
 	private Geometry_Vector positionVector;
 	private Geometry_Vector velocityVector;
 	protected double mass;
-
 	protected double radius;
+	// GUIRadius is the radius of the satellite on the screen.
 	protected int GUIRadius;
-
-	/**
-	 * Any data that is common to all heavenly bodies should go here.
-	 * 
-	 * It is very likely that your Satellite will need to know _at least_ the
-	 * following:
-	 * 
-	 * 
-	 * 1) it's location (in x,y) 2) it's velocity (how fast it is moving in x,y)
-	 * 3) it's mass
-	 * 
-	 *
-	 * Please note that if a PLANET (which ISA Satellite) needs some specific
-	 * data it would NOT go here, but instead in child class.
-	 * 
-	 * Note: Unlike the previous Circle Program, you _will_ need a location
-	 * point for the Satellite separate from the JComponent. (JComponent x,y are
-	 * integers and our simulation needs to use doubles. See the
-	 * update_screen_coordinates method below which has the job of converting
-	 * between Simulation x,y and screen x,y)
-	 * 
-	 * To make it easier to user your vector class, I suggest that the location
-	 * be a vector as well as the velocity
-	 *
-	 */
 
 	/**
 	 * This serialVersionUID is there to keep the compiler happy. We don't have
@@ -70,14 +35,14 @@ public abstract class Satellite extends JComponent {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * helps with debugging... what should this do?
+	 * Just return name. Used debugger more...
 	 */
 	public String toString() {
 		return this.getName();
 	}
 
 	/**
-	 * If necessary you can create this constructor
+	 * Basic constructor for satellite that sets up starting values.
 	 * 
 	 * @param x
 	 *            - where (in 2D) we are in the solar system
@@ -89,8 +54,10 @@ public abstract class Satellite extends JComponent {
 	 *            - how fast in 2D we are moving in meters per second
 	 * @param mass
 	 *            - how big we are (in kilograms)
-	 * 
-	 * 
+	 * @param my_radius
+	 *            - how wide we are (in km)
+	 * @param name
+	 *            - name of the satellite
 	 */
 	public Satellite(double _x, double _y, double velocity_x, double velocity_y, double my_mass, double my_radius,
 			String name) {
@@ -101,25 +68,40 @@ public abstract class Satellite extends JComponent {
 		this.setName(name);
 	}
 
+	/**
+	 * Constructor specifically for the Black Hole.
+	 * 
+	 * @param x
+	 *            - where (in 2D) we are in the solar system
+	 * @param y
+	 *            - where (in 2D) we are in the solar system
+	 * @param mass
+	 *            - how big we are (in kilograms)
+	 * @param name
+	 *            - name of satellite
+	 */
 	public Satellite(double _x, double _y, double my_mass, String name) {
 		positionVector = new Geometry_Vector(_x, _y);
 		mass = my_mass;
 		this.setName(name);
 		velocityVector = new Geometry_Vector(0, 0);
-		// THIS IS ONLY FOR A BLACKHOLE
 	}
 
+	/**
+	 * Constructor specifically for the Flotsam.
+	 * 
+	 * @param x
+	 *            - where (in 2D) we are in the solar system
+	 * @param y
+	 *            - where (in 2D) we are in the solar system
+	 * @param velocity_x
+	 *            - how fast in 2D we are moving in meters per second
+	 * @param velocity_y
+	 *            - how fast in 2D we are moving in meters per second
+	 */
 	public Satellite(int _x, int _y, int _xVelocity, int _yVelocity) {
 		positionVector = new Geometry_Vector(_x, _y);
 		velocityVector = new Geometry_Vector(_xVelocity, _yVelocity);
-		// THIS IS ONLY FOR FLOTSAM
-	}
-	
-	public Satellite() {
-		positionVector = new Geometry_Vector(0,0);
-		this.GUIRadius = 0;
-		this.velocityVector = new Geometry_Vector(0,0);
-		// THIS IS ONLY FOR EXPLOSION
 	}
 
 	/**
@@ -130,21 +112,6 @@ public abstract class Satellite extends JComponent {
 	 * 
 	 * Math Example: our position is 1,1. The move vector is 10,10. Our new
 	 * position is 11,11
-	 *
-	 *
-	 * Abstract Method Choice: for this function, and many below, you must
-	 * choose whether to implement it here or in all child classes. In this
-	 * case:
-	 * 
-	 * 1) is "moving" the same regardless of type. Do stars and planets "move"
-	 * through space the same. (Hint, I would expect that they do). If the
-	 * answer is that all satellites move the same, then remove the "Abstract"
-	 * label and implement the code here.
-	 * 
-	 * 2) if what it means to move is different based on the type of object
-	 * (this would be true in a video game) then you would leave this as an
-	 * abstract method and only implement it in the child classes.
-	 * 
 	 * 
 	 * @param dt
 	 *            a small number representing how much time has gone by
@@ -175,14 +142,6 @@ public abstract class Satellite extends JComponent {
 	 *            Math Example: Our current position is 5,5. Our current
 	 *            velocity is 100,100. The time step is 0.05; Our new position
 	 *            would be 10,10 -> 5,5 + (100,100 * .05)
-	 * 
-	 *            WARNING: even if not explicitly stated in other parts of this
-	 *            documentation, all of the math should be done via the Vector
-	 *            library.
-	 * 
-	 *            WARNING 2: This code does not change anything about the GUI
-	 *            display of the object
-	 * 
 	 */
 	public void update_position(double dt) {
 		Geometry_Vector changeVector = new Geometry_Vector(this.velocityVector);
@@ -197,10 +156,7 @@ public abstract class Satellite extends JComponent {
 	 * 
 	 * @param acceleration
 	 *            - a vector of the force being exerted on us
-	 * 
-	 *            Abstract Method Choice: Once again, you can implement here or
-	 *            in the children, as appropriate
-	 * 
+	 *
 	 *            Math Example:
 	 * 
 	 *            if my velocity is 100,100 (mph) and I have been told to
@@ -240,45 +196,27 @@ public abstract class Satellite extends JComponent {
 	 * to update the display size of the object. the last thing you would do is
 	 * set the location of the object.
 	 * 
-	 * Abstract Method Choice: Once again, if you believe the math to transform
-	 * from one x,y to another is different for different objects, then you
-	 * should leave this method abstract and let each child class implement it.
-	 * 
-	 * If you believe the math is the same for all objects, you should remove
-	 * the "abstract" keyword and write the code here.
-	 * 
-	 * Math: to start try the following: divide the simluation X,Y by say
-	 * 1,000,000. This should transform the positions into something reasonable,
-	 * (e.g., the earth becomes 149,0) Then simply use this vale.
-	 * 
 	 * The planets (assuming everything else is correct) will now rotate around
 	 * the 0,0 location of the GUI (the upper left hand corner). By then adding
 	 * half the width of the screen/height of the screen to this number (hard
 	 * code to say 500,500) the planets will rotate around 500, 500.
-	 * 
-	 * Once you have this working, try and make it work for any size screen
-	 *
 	 */
 	public void update_screen_coordinates(Geometry_Vector system_center, double system_radius, int window_width,
 			int window_height) {
 		this.update_display_size(system_radius);
-		
+
 		Geometry_Vector guiLocation = new Geometry_Vector(this.positionVector);
 		guiLocation.divide_by(2 * system_radius);
-		//Separate these two because we want to scale them differently.
+		// Separate these two because we want to scale them differently.
 		guiLocation.x = guiLocation.x * window_width;
 		guiLocation.y = guiLocation.y * window_height;
-		guiLocation.add_to_me(new Geometry_Vector(window_width/2, window_height/2));
-		guiLocation.subtract_from_me(new Geometry_Vector(this.GUIRadius,this.GUIRadius));
-		this.setLocation((int) guiLocation.x,(int) guiLocation.y);
+		guiLocation.add_to_me(new Geometry_Vector(window_width / 2, window_height / 2));
+		guiLocation.subtract_from_me(new Geometry_Vector(this.GUIRadius, this.GUIRadius));
+		this.setLocation((int) guiLocation.x, (int) guiLocation.y);
 	}
 
 	/**
-	 *
-	 * Abstract Method Choice: if the mass of an object is a common property to
-	 * all satellites, then define this getter here. If the (property) mass of
-	 * an object is different across various objects, leave this function
-	 * abstract.
+	 * Simple getter for mass of satellite.
 	 *
 	 * @return our mass
 	 */
@@ -287,9 +225,7 @@ public abstract class Satellite extends JComponent {
 	}
 
 	/**
-	 *
-	 * Abstract Method Choice: does what type we are define what our position
-	 * is?
+	 * Simple getter for position of satellite.
 	 *
 	 * @return our position
 	 */
@@ -298,9 +234,7 @@ public abstract class Satellite extends JComponent {
 	}
 
 	/**
-	 *
-	 * Abstract Method Choice: You can implement here or in the children, as
-	 * appropriate
+	 * Simple getter for velocity of satellite.
 	 *
 	 * @return our velocity
 	 */
@@ -320,35 +254,19 @@ public abstract class Satellite extends JComponent {
 	 * have to play with this to find an appropriate size such that we can see
 	 * everything, but they don't overlap each other
 	 * 
-	 * Abstract Method Choice: Consider the problems caused by the scales
-	 * involved in "Seeing" the solar system. Choice 1) If all satellites should
-	 * be drawn at the same scale, implement the code here. Choice 2) If all
-	 * satellites need to be drawn at a larger scale, then implement this in the
-	 * child classes. Choice 3) If some satellites need to be drawn at a larger
-	 * scale, but most can be drawn at a common scale, write the code here, then
-	 * override it in the appropriate child class.
-	 * 
-	 * 
-	 * Note: this function should use the JComponent Set Size function to change
-	 * the size of the GUI display of the object.
-	 * 
-	 * Note 2: we take in the radius_of_system parameter to allow this function
-	 * to know how big the displayed area is which can factor into how big we
-	 * draw our planets. To start you may want to make all displayed objects the
-	 * same size regardless, then see how changing their size affects the
-	 * simulation
-	 * 
-	 * Note 3: in general, the larger the region we want to see on the screen,
-	 * the smaller the satellites should be drawn
-	 * 
 	 * @param radius_of_universe
 	 *            - how far across the displayable universe (in our standard
 	 *            case we set the orbit of saturn as this value)
 	 */
 	abstract protected void update_display_size(double radius_of_system);
 
+	/**
+	 * Paint component override to go in and draw our circles based on the
+	 * settings setup elsewhere for the satellite.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
+		// 2D graphics makes our circles prettier...
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

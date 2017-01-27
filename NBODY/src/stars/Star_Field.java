@@ -1,4 +1,4 @@
-
+//Mark Van der Merwe and Tarun Sunkaraneni
 /**
  * @author H. James de St. Germain
  * @date   Spring 2007
@@ -41,6 +41,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+/**
+ * Star field is our panel that holds the solar system. Most made by the
+ * wonderful 2420 staff. Slight modifications here and there to handle supernova
+ * clicks and exploding planet clicks.
+ * 
+ * @author markvandermerwe
+ *
+ */
 public class Star_Field extends JPanel
 		implements MouseListener, MouseWheelListener, ActionListener, MouseMotionListener, ComponentListener {
 	/**
@@ -359,6 +367,8 @@ public class Star_Field extends JPanel
 	 *
 	 * @param how_many
 	 *            - how many flotsam to create
+	 * @param planet
+	 *            - which planet, if any, to explode into flotsam
 	 */
 	public void create_flotsam(int how_many, Planet planet) {
 
@@ -372,6 +382,8 @@ public class Star_Field extends JPanel
 			int y;
 
 			double radius;
+			// If a planet is clicked, place the flotsam where the planet used
+			// to be...
 			if (planet != null) {
 				radius = generator.nextInt((int) planet.radius);
 				x = (int) (planet.get_position().x + (radius * Math.cos(theta)));
@@ -559,12 +571,15 @@ public class Star_Field extends JPanel
 	public void mousePressed(MouseEvent e) {
 		Component[] comps = this.getComponents();
 
+		// Go through components to check if it was clicked.
 		for (int index = 0; index < comps.length; index++) {
 			if (comps[index].getBounds().contains(e.getPoint())) {
 				if (comps[index] instanceof Star) {
+					// If sun clicked, go supernova.
 					Star sun = (Star) comps[index];
 					sun.supernova();
 				} else if (comps[index] instanceof Planet) {
+					// If planet clicked, blow her up!
 					Planet planet = (Planet) comps[index];
 					this.remove(planet);
 					this.create_flotsam(10, planet);
