@@ -566,7 +566,6 @@ public class Star_Field extends JPanel
 					sun.supernova();
 				} else if (comps[index] instanceof Planet) {
 					Planet planet = (Planet) comps[index];
-					System.out.println(planet.getName());
 					this.remove(planet);
 					this.create_flotsam(10, planet);
 				}

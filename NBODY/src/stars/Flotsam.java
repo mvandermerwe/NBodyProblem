@@ -17,7 +17,7 @@ public class Flotsam extends Satellite {
 	protected void update_display_size(double radius_of_system) {
 		// make its scaling different so that it is big enough to see but also
 		// is emphasized to be small
-		this.GUIRadius = (int) (2889850000.0 / radius_of_system);
+		this.GUIRadius = (int) (2_889_850_000.0 / radius_of_system);
 		this.setSize(new Dimension(2 * this.GUIRadius, 2 * this.GUIRadius));
 	}
 
